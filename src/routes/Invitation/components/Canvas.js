@@ -1,6 +1,6 @@
 import React, { useRef, useLayoutEffect } from "react";
 import { string } from "prop-types";
-import BGImage from "./assets/rnc.png";
+import BGImage from "../assets/rnc.png";
 
 const Canvas = ({ name }) => {
   const canvas = useRef(null);

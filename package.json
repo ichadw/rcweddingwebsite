@@ -9,10 +9,12 @@
     "emotion": "^10.0.9",
     "firebase": "^6.1.1",
     "lodash": "^4.17.14",
+    "material-table": "^1.40.1",
     "react": "^16.8.6",
     "react-bootstrap-table-next": "^3.1.5",
     "react-dom": "^16.8.6",
     "react-helmet-async": "^1.0.2",
+    "react-loadable": "^5.5.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "tabletop": "^1.5.2"
