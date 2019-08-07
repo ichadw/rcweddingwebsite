@@ -11,14 +11,16 @@ const config = {
 };
 
 class Firebase {
-  constructor() {    
+  constructor() {
     app.initializeApp(config);
-    
+
     this.fieldValue = app.firestore.FieldValue;
     this.db = app.firestore();
   }
 
   getHeader = () => this.db.collection("header");
+  getMessages = () => this.db.collection("letter");
+  createMessage = data => this.db.collection("letter").add(data);
 }
 
 export default Firebase;

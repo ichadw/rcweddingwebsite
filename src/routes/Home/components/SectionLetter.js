@@ -1,4 +1,5 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
+import { object } from "prop-types";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -6,6 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { css } from "emotion";
+import { withFirebase } from "../../../components/Firebase";
 
 const MainSectionText = css`
   text-align: center;
@@ -21,18 +23,26 @@ const useStyles = makeStyles({
   }
 });
 
-const SectionLetter = () => {
+const SectionLetter = ({ firebase }) => {
   const [values, setValues] = useState({});
   const classes = useStyles();
 
   const handleChange = e => {
-    const { value, id } = e;
+    const { value, id } = e.target;
 
     setValues(prevVal => ({ ...prevVal, [id]: value }));
   };
 
   const handleClickSend = () => {
-    setValues({});
+    firebase
+      .createMessage({ ...values, created: new Date().getTime() })
+      .then(docRef => {
+        setValues({});
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(error => {
+        console.error("Error adding document: ", error);
+      });
   };
 
   return (
@@ -112,4 +122,8 @@ const SectionLetter = () => {
   );
 };
 
-export default memo(SectionLetter);
+SectionLetter.propTypes = {
+  firebase: object.isRequired
+};
+
+export default withFirebase(SectionLetter);
