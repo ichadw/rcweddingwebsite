@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Loader from "../Loader";
+import Footer from "./Footer";
 
 import { withFirebase } from "../Firebase";
 import { oneOfType, func, node, object } from "prop-types";
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({ children, firebase }) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -57,11 +58,12 @@ const Layout = ({ children, firebase }) => {
       <AppBar position="static" className={classes.customAppBar}>
         <Toolbar>
           <a href="/" className={classes.anchorNavBar}>
-            Robin & Clarissa Wedding
+            R & C
           </a>
         </Toolbar>
       </AppBar>
       {children}
+      <Footer />
     </>
   );
 };

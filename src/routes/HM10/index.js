@@ -2,7 +2,7 @@ import Loadable from "react-loadable";
 
 const Loading = ({ error, pastDelay, timedOut }) => {
   if (error || timedOut) {
-    throw new Error("Failed to load Home chunk");
+    throw new Error("Failed to load HM10 chunk");
   } else if (pastDelay) {
     return null;
   } else {
@@ -10,9 +10,10 @@ const Loading = ({ error, pastDelay, timedOut }) => {
   }
 };
 
-const Home = Loadable({
-  loader: () => import(/* webpackChunkName: "home" */ "../Home/components"),
+const HM10 = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "hm10" */ "../HM10/components"),
   loading: Loading
 });
 
-export default Home;
+export default HM10;
