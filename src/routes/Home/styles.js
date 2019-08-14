@@ -1,7 +1,9 @@
 import { css } from "emotion";
 import heartImage from "./assets/time_hrt.png";
 
-export const MainSectionContainer = css``;
+export const MainSectionContainer = css`
+  padding-top: 56px;
+`;
 
 export const MainSectionWrapper = css`
   position: relative;
@@ -32,6 +34,17 @@ export const MainSectionText = css`
   @media only screen and (max-width: 1024px) {
     font-size: 1rem;
   }
+  @media only screen and (max-width: 420px) {
+    font-size: 0.75rem;
+    top: 0;
+
+    h2 {
+      margin-bottom: 0px;
+    }
+    p {
+      margin-top: 0px;
+    }
+  }
 `;
 
 export const CountdownContainer = css`
@@ -43,6 +56,10 @@ export const CountdownContainer = css`
   z-index: 9999;
   @media only screen and (max-width: 1024px) {
     top: 30%;
+  }
+  @media only screen and (max-width: 420px) {
+    top: 17%;
+    font-size: 20%;
   }
 `;
 
@@ -73,6 +90,10 @@ export const CountdownHeart = css`
     height: 75px;
     background-size: 70% 50%;
   }
+  @media only screen and (max-width: 420px) {
+    background-size: 70% 30%;
+    font-size: 0.5rem;
+  }
 `;
 
 export const CountdownAmount = css`
@@ -88,5 +109,9 @@ export const CountdownAmount = css`
     font-size: 1rem;
     line-height: 70px;
     height: 70px;
+  }
+  @media only screen and (max-width: 420px) {
+    height: 50px;
+    font-size: 0.5rem;
   }
 `;

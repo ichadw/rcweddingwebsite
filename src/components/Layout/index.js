@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { oneOfType, func, node, object } from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+
 import Loader from "../Loader";
 import Footer from "./Footer";
-
 import { withFirebase } from "../Firebase";
-import { oneOfType, func, node, object } from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +18,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   customAppBar: {
+    position: "fixed",
+    zIndex: 10000,
     backgroundColor: "#DB4766"
   },
   anchorNavBar: {
@@ -24,7 +27,17 @@ const useStyles = makeStyles(theme => ({
     fontFamily: "'Great Vibes', cursive",
     fontSize: "22px",
     textDecoration: "none",
-    fontWeight: "600"
+    fontWeight: "600",
+    marginRight: "12px"
+  },
+  anchorList: {
+    color: "#fff",
+    fontFamily: "Open Sans",
+    fontSize: "0.75rem",
+    width: "70px",
+    margin: "0 12px",
+    fontWeight: "400",
+    cursor: "pointer"
   }
 }));
 
@@ -44,6 +57,39 @@ const Layout = ({ children, firebase }) => {
     });
   }, [firebase]);
 
+  // const handleScrollTo = useCallback(
+  //   id => () => {
+  //     const posY = document.getElementById(id)
+  //       ? document.getElementById(id).getBoundingClientRect().top - 64
+  //       : 0;
+  //     console.log("posY", document.getElementById(id).getBoundingClientRect());
+  //     console.log("scrollHeight", document.getElementById(id).scrollHeight);
+  //     window.scrollTo({
+  //       top: posY,
+  //       behavior: "smooth"
+  //     });
+  //   },
+  //   []
+  // );
+
+  // const listAnchor = [
+  //   { id: "about", title: "About" },
+  //   { id: "place", title: "Wedding Events" },
+  //   { id: "map", title: "Map Guide" },
+  //   { id: "letter", title: "Send Letter" }
+  // ];
+
+  // const renderAnchorLink = () =>
+  //   listAnchor.map((res, idx) => (
+  //     <span
+  //       key={idx}
+  //       className={classes.anchorList}
+  //       onClick={handleScrollTo(res.id)}
+  //     >
+  //       {res.title}
+  //     </span>
+  //   ));
+
   return loading ? (
     <Loader />
   ) : (
@@ -57,9 +103,10 @@ const Layout = ({ children, firebase }) => {
       </Helmet>
       <AppBar position="static" className={classes.customAppBar}>
         <Toolbar>
-          <a href="/" className={classes.anchorNavBar}>
+          <Link to="/" className={classes.anchorNavBar}>
             R & C
-          </a>
+          </Link>
+          {/* {renderAnchorLink()} */}
         </Toolbar>
       </AppBar>
       {children}
@@ -70,7 +117,7 @@ const Layout = ({ children, firebase }) => {
 
 Layout.propTypes = {
   children: oneOfType([func, node]),
-  firebase: object.isRequired,
+  firebase: object.isRequired
 };
 
 export default withFirebase(Layout);
